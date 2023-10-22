@@ -10,4 +10,4 @@ def render_pdf(template: str, context: dict):
         loader=jinja2.FileSystemLoader(searchpath='templates')
     ).get_template(template).render(context)
     config = pdfkit.configuration(wkhtmltopdf=get_wkhtmltopdf_bin())
-    pdfkit.from_string(rendered_html, context["full_name"] + '.pdf', configuration=config)
+    pdfkit.from_string(rendered_html, 'pdfs/' + context["full_name"] + '.pdf', configuration=config)
