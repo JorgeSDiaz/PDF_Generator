@@ -30,7 +30,8 @@ class Student(BaseModel):
 async def root():
     return {"message": "Works!"}
 
-@app.get("/pdf", status_code=200)
+@app.post("/pdf", status_code=200)
 async def pdf(context: Student):
-    render_pdf("template.html", context.dict())
-    return FileResponse('pdfs/' + context.dict()["Full_Name"] + '.pdf' , media_type="application/pdf")
+    context_dict = context.dict()
+    render_pdf("template.html", context_dict)
+    return FileResponse('pdfs/' + context_dict["Full_Name"].replace(" ", "_") + '.pdf' , media_type="application/pdf")
